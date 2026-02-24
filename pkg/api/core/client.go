@@ -620,6 +620,56 @@ func (c *Client) NetworkGet(ctx context.Context) (*NetworkConfig, error) {
 	return api.List[NetworkConfig](c.client, ctx, methods.NetworkGet)
 }
 
+func (c *Client) NotificationTemplateList(
+	ctx context.Context,
+) (*NotificationTemplateListResponse, error) {
+	return api.List[NotificationTemplateListResponse](
+		c.client,
+		ctx,
+		methods.NotificationTemplateList,
+	)
+}
+
+func (c *Client) NotificationTemplateGet(
+	ctx context.Context,
+	templateID int64,
+) (*NotificationTemplate, error) {
+	return api.Get[NotificationTemplate](
+		c.client,
+		ctx,
+		&NotificationTemplateGetRequest{TemplateID: templateID},
+		methods.NotificationTemplateGet,
+	)
+}
+
+func (c *Client) NotificationTemplateCreate(
+	ctx context.Context,
+	req NotificationTemplateCreateRequest,
+) (*NotificationTemplateCreateResponse, error) {
+	return api.Get[NotificationTemplateCreateResponse](
+		c.client,
+		ctx,
+		&req,
+		methods.NotificationTemplateCreate,
+	)
+}
+
+func (c *Client) NotificationTemplateSet(
+	ctx context.Context,
+	req NotificationTemplateSetRequest,
+) error {
+	return api.Void(c.client, ctx, &req, methods.NotificationTemplateSet)
+}
+
+func (c *Client) NotificationTemplateDelete(ctx context.Context, templateID int64) error {
+	return api.Void(
+		c.client,
+		ctx,
+		&NotificationTemplateDeleteRequest{TemplateID: templateID},
+		methods.NotificationTemplateDelete,
+	)
+}
+
 // UserCreate creates a new user.
 func (c *Client) UserCreate(
 	ctx context.Context,

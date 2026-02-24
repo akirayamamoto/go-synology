@@ -68,6 +68,15 @@ type Api interface {
 
 	NetworkGet(ctx context.Context) (*NetworkConfig, error)
 
+	NotificationTemplateList(ctx context.Context) (*NotificationTemplateListResponse, error)
+	NotificationTemplateGet(ctx context.Context, templateID int64) (*NotificationTemplate, error)
+	NotificationTemplateCreate(
+		ctx context.Context,
+		req NotificationTemplateCreateRequest,
+	) (*NotificationTemplateCreateResponse, error)
+	NotificationTemplateSet(ctx context.Context, req NotificationTemplateSetRequest) error
+	NotificationTemplateDelete(ctx context.Context, templateID int64) error
+
 	UserCreate(ctx context.Context, req UserCreateRequest) (*UserCreateResponse, error)
 	UserModify(ctx context.Context, req UserModifyRequest) (*UserModifyResponse, error)
 	UserDelete(ctx context.Context, req UserDeleteRequest) (*UserDeleteResponse, error)
