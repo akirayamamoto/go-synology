@@ -1,6 +1,11 @@
 package core
 
-import "testing"
+import (
+	"strings"
+	"testing"
+
+	"github.com/synology-community/go-synology/pkg/query"
+)
 
 func TestNotificationTemplate_EffectiveName(t *testing.T) {
 	tpl := NotificationTemplate{
@@ -59,5 +64,29 @@ func TestNotificationTemplate_DefaultTemplate(t *testing.T) {
 				t.Fatalf("expected %v, got %v", tt.want, got)
 			}
 		})
+	}
+}
+
+func TestNotificationTemplateSetRequest_EncodesEnabledFalseInSettingsJSON(t *testing.T) {
+	request := NotificationTemplateSetRequest{
+		TemplateID:   4,
+		TemplateName: "rule",
+		Settings: []NotificationTemplateSetting{
+			{Tag: "docker_container_unexpected_exit", Enabled: false},
+		},
+	}
+
+	values, err := query.Values(request)
+	if err != nil {
+		t.Fatalf("failed to encode query values: %v", err)
+	}
+
+	encodedSettings := values.Get("settings")
+	if encodedSettings == "" {
+		t.Fatalf("expected settings query value to be present")
+	}
+
+	if !strings.Contains(encodedSettings, `"enabled":false`) {
+		t.Fatalf("expected settings JSON to include enabled=false, got %s", encodedSettings)
 	}
 }
