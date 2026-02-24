@@ -2,7 +2,7 @@ package core
 
 type NotificationTemplateSetting struct {
 	Tag     string `json:"tag,omitempty"`
-	Enabled bool   `json:"enabled,omitempty"`
+	Enabled bool   `json:"enabled"`
 }
 
 type NotificationTemplateConfig struct {
