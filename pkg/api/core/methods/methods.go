@@ -8,6 +8,7 @@ const (
 	Core_Event                  = "SYNO.Core.EventScheduler"
 	Core_Event_Root             = "SYNO.Core.EventScheduler.Root"
 	Core_Network                = "SYNO.Core.Network"
+	Core_Notification_Template  = "SYNO.Core.Notification.Advance.FilterSettings.Template"
 	Core_Package                = "SYNO.Core.Package"
 	Core_Package_Feed           = "SYNO.Core.Package.Feed"
 	Core_Package_Installation   = "SYNO.Core.Package.Installation"
@@ -311,6 +312,36 @@ var (
 		API:            Core_Network,
 		Version:        2,
 		Method:         api.MethodGet,
+		ErrorSummaries: api.GlobalErrors,
+	}
+	NotificationTemplateList = api.Method{
+		API:            Core_Notification_Template,
+		Version:        1,
+		Method:         api.MethodList,
+		ErrorSummaries: api.GlobalErrors,
+	}
+	NotificationTemplateGet = api.Method{
+		API:            Core_Notification_Template,
+		Version:        1,
+		Method:         api.MethodGet,
+		ErrorSummaries: api.GlobalErrors,
+	}
+	NotificationTemplateCreate = api.Method{
+		API:            Core_Notification_Template,
+		Version:        1,
+		Method:         api.MethodCreate,
+		ErrorSummaries: api.GlobalErrors,
+	}
+	NotificationTemplateSet = api.Method{
+		API:            Core_Notification_Template,
+		Version:        1,
+		Method:         api.MethodSet,
+		ErrorSummaries: api.GlobalErrors,
+	}
+	NotificationTemplateDelete = api.Method{
+		API:            Core_Notification_Template,
+		Version:        1,
+		Method:         api.MethodDelete,
 		ErrorSummaries: api.GlobalErrors,
 	}
 )
